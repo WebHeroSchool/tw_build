@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "hello": "node hello.js",
+    "hello": "echo Hello",
     "create": "mkdir build",
-    "delete": "rmdir build"
+    "delete": "rm -rf build"
   },
   "repository": {
     "type": "git",
