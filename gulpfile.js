@@ -1,5 +1,5 @@
 const gulp = require('gulp');
-
+const babel = require('gulp-babel');
 const path = {
     css: {
         input: 'src/css/*.css',
@@ -12,6 +12,9 @@ const path = {
 }
 gulp.task('js',()=>{
     return gulp.src(path.js.input)
+    .pipe(babel({
+        presets: ['@babel/env']
+    }))
     .pipe(gulp.dest(path.js.output));
 });
 
