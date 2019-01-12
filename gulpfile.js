@@ -37,4 +37,9 @@ gulp.task('build-css',()=>{
     .pipe(gulp.dest(path.css.output));
 })
 
-gulp.task('default',['build-js','build-css'])
+gulp.task('default',['build-js','build-css']);
+
+gulp.task('watch', ()=>{
+    gulp.watch(path.js.input, ['build-js']);
+    gulp.watch(path.css.input, ['build-css']);
+})
