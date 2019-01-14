@@ -58,3 +58,6 @@ gulp.task('browser-sync',()=>{
 gulp.task('watch-js',['build-js'],()=>browserSync.reload());
 gulp.task('watch-css',['build-css'],()=>browserSync.reload());
 gulp.task('watch-html',()=>browserSync.reload());
+
+gulp.task('prod',['build-js','build-css']);
+gulp.task('dev',['build-js','build-css','browser-sync']);
