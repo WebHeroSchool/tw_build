@@ -1,6 +1,8 @@
 const gulp = require('gulp');
+const env = require('gulp-env');
 const babel = require('gulp-babel');
 const concat = require('gulp-concat');
+const gulpif = require('gulp-if');
 const uglify = require('gulp-uglify');
 const cssnano = require('gulp-cssnano');
 const sourcemaps = require('gulp-sourcemaps');
@@ -20,6 +22,11 @@ const path = {
     }
 };
 
+env({
+    file: '.env',
+    type: 'ini'
+})
+
 gulp.task('build-js',()=>{
     return gulp.src(path.js.input)
     .pipe(sourcemaps.init())
@@ -27,7 +34,7 @@ gulp.task('build-js',()=>{
     .pipe(babel({
         presets: ['@babel/env']
     }))
-    .pipe(uglify())
+    .pipe(gulpif(process.env.NODE_ENV === 'production' ,uglify()))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(path.js.output));
 })
@@ -36,7 +43,7 @@ gulp.task('build-css',()=>{
     return gulp.src(path.css.input)
     .pipe(sourcemaps.init())
     .pipe(concat('style.min.css'))
-    .pipe(cssnano())
+    .pipe(gulpif(process.env.NODE_ENV === 'production' ,cssnano()))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(path.css.output));
 })

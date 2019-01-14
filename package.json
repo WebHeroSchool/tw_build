@@ -5,9 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "hello": "echo Hello",
-    "create": "mkdir build",
-    "delete": "rm -rf build"
+    "start": "gulp dev",
+    "build": "gulp prod"
   },
   "repository": {
     "type": "git",
@@ -25,7 +24,9 @@
     "browser-sync": "^2.26.3",
     "gulp": "^3.9.1",
     "gulp-babel": "^8.0.0",
-    "gulp-cssnano": "^2.1.3"
+    "gulp-cssnano": "^2.1.3",
+    "gulp-env": "^0.4.0",
+    "gulp-if": "^2.0.2"
   },
   "dependencies": {
     "gulp-concat": "^2.6.1",
