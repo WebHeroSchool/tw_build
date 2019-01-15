@@ -7,7 +7,7 @@ const uglify = require('gulp-uglify');
 const cssnano = require('gulp-cssnano');
 const sourcemaps = require('gulp-sourcemaps');
 const browserSync = require('browser-sync').create();
-
+const postcss = require('gulp-postcss');
 const path = {
     css: {
         input: 'src/css/*.css',
@@ -40,8 +40,10 @@ gulp.task('build-js',()=>{
 })
 
 gulp.task('build-css',()=>{
+    const plugins = [];
     return gulp.src(path.css.input)
     .pipe(sourcemaps.init())
+    .pipe(postcss(plugins))
     .pipe(concat('style.min.css'))
     .pipe(gulpif(process.env.NODE_ENV === 'production' ,cssnano()))
     .pipe(sourcemaps.write())
