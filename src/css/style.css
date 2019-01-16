@@ -2,6 +2,11 @@ h1{
     font-weight: bold;
     color: green;
 }
-::placeholder {
-    color: gray;
-  }
+.hey{
+    a{
+        color: blue;
+    }
+    &_men{
+        background-color: #fff;
+    }
+}
