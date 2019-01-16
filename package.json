@@ -29,7 +29,8 @@
     "gulp-env": "^0.4.0",
     "gulp-if": "^2.0.2",
     "gulp-postcss": "^8.0.0",
-    "postcss-nested": "^4.1.1"
+    "postcss-nested": "^4.1.1",
+    "postcss-short": "^5.0.0"
   },
   "dependencies": {
     "gulp-concat": "^2.6.1",

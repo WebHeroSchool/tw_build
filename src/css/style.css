@@ -3,10 +3,14 @@ h1{
     color: green;
 }
 .hey{
-    a{
+    a {
         color: blue;
     }
     &_men{
         background-color: #fff;
     }
+}
+
+.icon {
+    size: 48px;
 }
