@@ -2,3 +2,19 @@ h1{
     font-weight: bold;
     color: green;
 }
+.hey{
+    a {
+        color: blue;
+    }
+    &_men{
+        background-color: #fff;
+    }
+}
+
+.icon {
+    size: 48px;
+}
+
+:root {
+    --mainColor: rgba(18, 52, 86, 0.47059);
+  }
