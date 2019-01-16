@@ -2,3 +2,6 @@ h1{
     font-weight: bold;
     color: green;
 }
+::placeholder {
+    color: gray;
+  }
