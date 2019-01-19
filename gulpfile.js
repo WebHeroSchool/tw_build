@@ -13,6 +13,9 @@ const nested = require('postcss-nested');
 const postcssShort = require('postcss-short');
 const assets  = require('postcss-assets');
 const postcssPresetEnv = require('postcss-preset-env');
+const glob = require('glob');
+const handlebars = require('gulp-compile-handlebars'); 
+const rename = require('gulp-rename');
 
 const path = {
     css: {
@@ -23,8 +26,9 @@ const path = {
         input: 'src/js/*.js',
         output: 'build/js'
     },
-    html: {
-        input: '*.html'
+    templates: {
+        input: 'src/templates/**/*.hbs',
+        output: 'build'
     }
 };
 
@@ -32,6 +36,23 @@ env({
     file: '.env',
     type: 'ini'
 })
+gulp.task('build-hbs',()=>{
+    glob(path.templates.input,(err,files)=>{
+        if(!err){
+            const options = {
+                ignorePartials: true,
+                batch: files.map(item=> item.slice(0,item.lastIndexOf('/')))
+            };
+    
+            gulp.src(`src/templates/index.hbs`)
+                .pipe(handlebars({}, options))
+                .pipe(rename('index.html'))
+                .pipe(gulp.dest(path.templates.output))
+        } else{
+            console.log('error compile hbs');
+        }
+    });
+});
 
 gulp.task('build-js',()=>{
     return gulp.src(path.js.input)
@@ -72,17 +93,17 @@ gulp.task('default',['build-js','build-css']);
 gulp.task('browser-sync',()=>{
     browserSync.init({
         server: {
-            baseDir: "./"
+            baseDir: "./build"
         }
     });
     gulp.watch(path.js.input, ['watch-js']);
     gulp.watch(path.css.input, ['watch-css']);
-    gulp.watch(path.html.input, ['watch-html']);
+    gulp.watch(path.templates.input, ['watch-hbs']);
 })
 
 gulp.task('watch-js',['build-js'],()=>browserSync.reload());
 gulp.task('watch-css',['build-css'],()=>browserSync.reload());
-gulp.task('watch-html',()=>browserSync.reload());
+gulp.task('watch-hbs',['build-hbs'],()=>browserSync.reload());
 
 gulp.task('prod',['build-js','build-css']);
 gulp.task('dev',['build-js','build-css','browser-sync']);
