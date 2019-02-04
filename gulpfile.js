@@ -16,6 +16,7 @@ const postcssPresetEnv = require('postcss-preset-env');
 const glob = require('glob');
 const handlebars = require('gulp-compile-handlebars'); 
 const rename = require('gulp-rename');
+const templatesContext = require('./src/templates/test.json');
 
 const path = {
     css: {
@@ -45,7 +46,7 @@ gulp.task('build-hbs',()=>{
             };
     
             gulp.src(`src/templates/index.hbs`)
-                .pipe(handlebars({}, options))
+                .pipe(handlebars(templatesContext, options))
                 .pipe(rename('index.html'))
                 .pipe(gulp.dest(path.templates.output))
         } else{
