@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,15 +8,19 @@
     <link rel="stylesheet" href="css/style.min.css">
     <title>Document</title>
 </head>
+
 <body>
     {{> header}}
     {{> side}}
 
     <div class="content">
         <div class="content__in">In</div>
-        <p>hello {{firstname}}</p> 
+        <p>hello {{firstname}}</p>
+        <p>hello {{ capitals firstname}}</p>
+        <p>sum {{ sum 5 10}}</p>
     </div>
-        {{> footer}}
+    {{> footer}}
     <script src="js/common.min.js"></script>
 </body>
+
 </html>
