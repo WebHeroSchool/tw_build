@@ -5,6 +5,7 @@ const concat = require("gulp-concat");
 const gulpif = require("gulp-if");
 const uglify = require("gulp-uglify");
 const cssnano = require("gulp-cssnano");
+const eslint = require("gulp-eslint");
 const sourcemaps = require("gulp-sourcemaps");
 const browserSync = require("browser-sync").create();
 const postcss = require("gulp-postcss");
@@ -44,8 +45,8 @@ gulp.task("build-hbs", () => {
 				ignorePartials: true,
 				batch: files.map(item => item.slice(0, item.lastIndexOf("/"))),
 				helpers: {
-                    capitals: str => str.toUpperCase(),
-                    sum: (a,b)=>a+b
+					capitals: str => str.toUpperCase(),
+					sum: (a, b) => a + b
 				}
 			};
 
@@ -59,7 +60,12 @@ gulp.task("build-hbs", () => {
 		}
 	});
 });
-
+gulp.task("eslint", () => {
+	return gulp
+		.src(path.js.input)
+		.pipe(eslint({ configFile: "eslint.json" }))
+		.pipe(eslint.format());
+});
 gulp.task("build-js", () => {
 	return gulp
 		.src(path.js.input)
